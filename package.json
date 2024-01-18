@@ -1,0 +1,47 @@
+{
+  "name": "bepunk",
+  "version": "0.0.0",
+  "description": "a beer store",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "18",
+    "react-dom": "18"
+  },
+  "devDependencies": {
+    "@fullstacksjs/eslint-config": "10.9.0",
+    "@fullstacksjs/tsconfig": "1.1.0",
+    "@types/node": "20",
+    "@types/react": "18",
+    "@types/react-dom": "18",
+    "eslint": "8.56.0",
+    "husky": "8.0.0",
+    "lint-staged": "15.2.0",
+    "prettier": "3.2.4",
+    "typescript": "5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirabbasJ/bepunk.git"
+  },
+  "keywords": [
+    "punk-api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmirabbasJ/bepunk/issues"
+  },
+  "homepage": "https://github.com/AmirabbasJ/bepunk#readme",
+  "volta": {
+    "node": "20.9.0",
+    "npm": "8.10.0"
+  }
+}

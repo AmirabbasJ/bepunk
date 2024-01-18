@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": "@fullstacksjs/tsconfig/next",
+  "compilerOptions": {
+    "target": "ESNext",
+  },
+  "include": ["next-env.d.ts", "src"],
+  "exclude": ["node_modules"],
+}
