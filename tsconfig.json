@@ -6,6 +6,7 @@
     "paths": {
       "@/design": ["./src/libs/design/index.ts"],
       "@/components": ["./src/components/index.ts"],
+      "@/domain": ["./src/libs/domain/index.ts"],
     },
     "strictNullChecks": true,
   },
