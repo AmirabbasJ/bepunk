@@ -1,9 +1,3 @@
-import { Title } from '@mantine/core';
+import { Store } from '../app';
 
-export default function Home() {
-  return (
-    <main>
-      <Title order={1}>Heading 1</Title>
-    </main>
-  );
-}
+export default Store;

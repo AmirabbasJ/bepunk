@@ -5,6 +5,7 @@
     "target": "ESNext",
     "paths": {
       "@/design": ["./src/libs/design/index.ts"],
+      "@/components": ["./src/components/index.ts"],
     },
   },
   "include": ["next-env.d.ts", "src"],
