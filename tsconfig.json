@@ -3,6 +3,9 @@
   "extends": "@fullstacksjs/tsconfig/next",
   "compilerOptions": {
     "target": "ESNext",
+    "paths": {
+      "@/design": ["./src/libs/design/index.ts"],
+    },
   },
   "include": ["next-env.d.ts", "src"],
   "exclude": ["node_modules"],
