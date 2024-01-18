@@ -6,7 +6,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.punkapi.com',
-        pathname: '/v2/192.png',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
       },
     ],
   },

@@ -1,42 +1,39 @@
-import {
-  ActionIcon,
-  Badge,
-  Button,
-  Card,
-  Center,
-  Group,
-  Stack,
-  Text,
-} from '@mantine/core';
-import { IconStar } from '@tabler/icons-react';
-import Image from 'next/image';
+import { ActionIcon, Card, Image, Stack, Text } from '@mantine/core';
+import { IconStar, IconStarFilled } from '@tabler/icons-react';
+import NextImage from 'next/image';
 
 import type { Beer } from '@/domain';
 
 interface Props {
   beer: Beer;
+  isFavorite?: boolean;
 }
 
-export const BeerCard = ({ beer }: Props) => {
+const fallbackImage = '/placeholder.png';
+
+export const BeerCard = ({ beer, isFavorite = false }: Props) => {
   return (
     <Card
       shadow="sm"
       padding="lg"
       radius="md"
+      h="100%"
       withBorder
-      style={{ cursor: 'pointer' }}
+      bg="gray.1"
+      style={{ cursor: 'pointer', userSelect: 'none' }}
     >
       <Card.Section>
-        <Stack align="end" p="sm">
+        <Stack align="end" pt="sm" pr="sm">
           <ActionIcon color="yellow" variant="transparent" radius="md">
-            <IconStar />
+            {isFavorite ? <IconStarFilled /> : <IconStar />}
           </ActionIcon>
         </Stack>
       </Card.Section>
-      <Stack gap="sm" align="center">
-        <Text>Norway Fjord Adventures</Text>
+      <Stack gap="sm" align="center" justify="space-between" h="100%">
+        <Text>{beer.name}</Text>
         <Image
-          src={beer.picture}
+          component={NextImage}
+          src={beer.picture ?? fallbackImage}
           width={50}
           height={0}
           alt="Norway"
@@ -44,8 +41,7 @@ export const BeerCard = ({ beer }: Props) => {
         />
 
         <Text size="sm" c="dimmed">
-          With Fjord Tours you can explore more of the magical fjord landscapes
-          with tours and activities on and around the fjords of Norway
+          {beer.tagline}
         </Text>
       </Stack>
     </Card>
