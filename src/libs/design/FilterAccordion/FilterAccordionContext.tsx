@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 
 export interface FilterAccordionContext {
-  addValue: (value: string) => void;
-  unsetValue: (value: string) => void;
-  values: string[];
+  setValue: (value: string) => void;
+  currentValue?: string;
+  loading: boolean;
 }
 
 export const FilterAccordionContext =

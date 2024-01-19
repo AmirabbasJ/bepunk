@@ -7,9 +7,10 @@ import { FilterAccordionContext } from './FilterAccordionContext';
 interface Props {
   title: string;
   id: string;
-  values: string[];
+  value?: string;
   open?: boolean;
-  onChange?: (values: string[]) => void;
+  loading: boolean;
+  onChange?: (value: string | null) => void;
   children: React.ReactNode;
 }
 
@@ -17,33 +18,25 @@ export const FilterAccordion = ({
   onChange,
   id,
   title,
-  values,
+  value,
+  loading,
   children,
   open = false,
 }: Props) => {
-  const addValue = useCallback(
-    (value: string) => {
-      const vals = [...values, value];
-      onChange?.(vals);
+  const setValue = useCallback(
+    (val: string) => {
+      onChange?.(val === value ? null : val);
     },
-    [values, onChange],
-  );
-
-  const unsetValue = useCallback(
-    (value: string) => {
-      const vals = values.filter(v => v !== value);
-      onChange?.(vals);
-    },
-    [values, onChange],
+    [onChange, value],
   );
 
   const ctx = useMemo(
     (): FilterAccordionContext => ({
-      addValue,
-      unsetValue,
-      values,
+      setValue,
+      loading,
+      currentValue: value,
     }),
-    [addValue, unsetValue, values],
+    [setValue, loading, value],
   );
 
   return (

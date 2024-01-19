@@ -1,11 +1,17 @@
 import { useQuery } from 'react-query';
 
+import type { Filter } from '@/filter';
+
 import { getBeers } from '../api';
 
-export const useBeers = () => {
+interface BeerConfig {
+  filter: Filter;
+}
+
+export const useBeers = ({ filter }: BeerConfig) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ['beers'],
-    queryFn: () => getBeers(),
+    queryKey: ['beers', filter],
+    queryFn: () => getBeers({ filter }),
   });
 
   return {

@@ -12,7 +12,7 @@ const IconMap = {
 } as Record<PairedFood, typeof IconMeat>;
 
 export const StoreNavbar = () => {
-  const { filter, addFilter } = useFilter();
+  const { filter, addFilter, loading } = useFilter();
 
   return (
     <Stack>
@@ -20,12 +20,14 @@ export const StoreNavbar = () => {
 
       <FilterAccordion
         open
+        loading={loading}
         id="food"
         title="Food"
-        values={filter.food}
-        onChange={foods => {
+        value={filter.food}
+        onChange={food => {
+          console.log(food);
           addFilter({
-            food: foods as PairedFood[],
+            food: food as PairedFood | undefined,
           });
         }}
       >

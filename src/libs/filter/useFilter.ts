@@ -1,26 +1,20 @@
-import { z } from 'zod';
-
-import type { PairedFood } from '@/domain';
-import { pairedFoodParser } from '@/domain';
 import { useSearchParams } from '@/searchParam';
 
-const Filter = z.object({
-  food: z.array(pairedFoodParser).default(() => []),
-});
-
-interface Filter {
-  food: PairedFood[];
-}
+import { Filter } from './Filter';
 
 export const useFilter = () => {
-  const { searchParams, addSearchParam } = useSearchParams();
-
-  const filter = Filter.parse(searchParams);
+  const { searchParams, addSearchParam, resetSearchParam, loading } =
+    useSearchParams();
+  const result = Filter.safeParse(searchParams);
+  if (!result.success) resetSearchParam();
+  const filter = result.success ? result.data : {};
 
   const addFilter = (partialFilter: Filter) => {
+    console.log(partialFilter);
+
     const newFilter = { ...filter, ...partialFilter };
     addSearchParam(newFilter);
   };
 
-  return { addFilter, filter };
+  return { addFilter, filter, loading };
 };

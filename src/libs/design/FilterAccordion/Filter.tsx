@@ -14,17 +14,18 @@ export const Filter = ({ value, label, ...rest }: Props) => {
   if (ctx == null)
     throw new Error('Filter cannot be used outside FilterAccordion component');
 
-  const { addValue, unsetValue, values } = ctx;
+  const { setValue, currentValue, loading } = ctx;
+  console.log({ loading });
+
   return (
     <Checkbox
-      key={label + value}
+      disabled={loading}
       label={label}
-      checked={values.includes(value)}
-      {...rest}
-      onChange={e => {
-        if (e.currentTarget.checked) addValue(value);
-        else unsetValue(value);
+      checked={value === currentValue}
+      onChange={() => {
+        setValue(value);
       }}
+      {...rest}
     />
   );
 };
