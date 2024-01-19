@@ -4,8 +4,7 @@ import { IconMeat, IconPizza } from '@tabler/icons-react';
 import { FilterAccordion } from '@/design';
 import type { PairedFood } from '@/domain';
 import { pairedFood, pairedFoods } from '@/domain';
-
-import { useFilter } from '../../libs/filter';
+import { useFilter } from '@/filter';
 
 const IconMap = {
   [pairedFood.pizza]: IconPizza,

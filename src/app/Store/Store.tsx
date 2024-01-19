@@ -1,8 +1,8 @@
 import { Grid } from '@mantine/core';
 
 import { useBeers } from '@/api';
+import { BeerCard } from '@/design';
 
-import { BeerCard } from '../../libs/design/BeerCard/BeerCard';
 import { StoreLayout } from './StoreLayout';
 
 export const Store = () => {
