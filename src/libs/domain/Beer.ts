@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import type { PairedFood } from './PairedFood';
-import { pairedFood } from './PairedFood';
+import { pairedFoodParser } from './PairedFood';
 
 export interface Beer {
   id: number;
@@ -20,9 +20,7 @@ const Beer = z.object({
   name: z.string(),
   picture: z.string().url().nullable(),
   tagline: z.string(),
-  pairedFood: z.enum(
-    Object.values(pairedFood) as [PairedFood, PairedFood, PairedFood],
-  ),
+  pairedFood: pairedFoodParser,
   abv: z.number(),
   description: z.string(),
   price: z.number(),

@@ -1,8 +1,11 @@
-import { Accordion, Checkbox, Stack, Title } from '@mantine/core';
+import { Stack, Title } from '@mantine/core';
 import { IconMeat, IconPizza } from '@tabler/icons-react';
 
-import type { PairedFood } from '../../libs/domain';
-import { pairedFood, pairedFoods } from '../../libs/domain';
+import { FilterAccordion } from '@/design';
+import type { PairedFood } from '@/domain';
+import { pairedFood, pairedFoods } from '@/domain';
+
+import { useFilter } from '../../libs/filter';
 
 const IconMap = {
   [pairedFood.pizza]: IconPizza,
@@ -10,22 +13,32 @@ const IconMap = {
 } as Record<PairedFood, typeof IconMeat>;
 
 export const StoreNavbar = () => {
+  const { filter, addFilter } = useFilter();
+
   return (
     <Stack>
       <Title>Filters</Title>
 
-      <Accordion defaultValue="Apples">
-        <Accordion.Item value="food">
-          <Accordion.Control>food:</Accordion.Control>
-          <Accordion.Panel>
-            <Stack gap="xs">
-              {pairedFoods.map(food => (
-                <Checkbox key={food} icon={IconMap[food]} label={food} />
-              ))}
-            </Stack>
-          </Accordion.Panel>
-        </Accordion.Item>
-      </Accordion>
+      <FilterAccordion
+        open
+        id="food"
+        title="Food"
+        values={filter.food}
+        onChange={foods => {
+          addFilter({
+            food: foods as PairedFood[],
+          });
+        }}
+      >
+        {pairedFoods.map(food => (
+          <FilterAccordion.Filter
+            value={food}
+            key={food}
+            icon={IconMap[food]}
+            label={food}
+          />
+        ))}
+      </FilterAccordion>
     </Stack>
   );
 };

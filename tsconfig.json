@@ -8,6 +8,7 @@
       "@/components": ["./src/components/index.ts"],
       "@/domain": ["./src/libs/domain/index.ts"],
       "@/api": ["./src/libs/api/index.ts"],
+      "@/searchParam": ["./src/libs/searchParam/index.ts"],
     },
     "strictNullChecks": true,
   },
