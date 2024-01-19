@@ -1,17 +1,18 @@
+import type { CardProps } from '@mantine/core';
 import { ActionIcon, Card, Image, Stack, Text } from '@mantine/core';
 import { IconStar, IconStarFilled } from '@tabler/icons-react';
-import NextImage from 'next/image';
 
 import type { Beer } from '@/domain';
 
-interface Props {
+import { openBeerDetailModal } from '../BeerDetail';
+import { BeerImage } from '../BeerImage';
+import { FavoriteButton } from '../FavoriteButton';
+
+interface Props extends CardProps {
   beer: Beer;
-  isFavorite?: boolean;
 }
 
-const fallbackImage = '/placeholder.png';
-
-export const BeerCard = ({ beer, isFavorite = false }: Props) => {
+export const BeerCard = ({ beer, ...rest }: Props) => {
   return (
     <Card
       shadow="sm"
@@ -21,25 +22,17 @@ export const BeerCard = ({ beer, isFavorite = false }: Props) => {
       withBorder
       bg="gray.1"
       style={{ cursor: 'pointer', userSelect: 'none' }}
+      onClick={() => openBeerDetailModal(beer)}
+      {...rest}
     >
       <Card.Section>
         <Stack align="end" pt="sm" pr="sm">
-          <ActionIcon color="yellow" variant="transparent" radius="md">
-            {isFavorite ? <IconStarFilled /> : <IconStar />}
-          </ActionIcon>
+          <FavoriteButton isFavorie={beer.isFavorite} />
         </Stack>
       </Card.Section>
       <Stack gap="sm" align="center" justify="space-between" h="100%">
         <Text>{beer.name}</Text>
-        <Image
-          component={NextImage}
-          src={beer.picture ?? fallbackImage}
-          width={50}
-          height={0}
-          alt="Norway"
-          style={{ width: 'auto', height: 'auto' }}
-        />
-
+        <BeerImage src={beer.picture} />
         <Text size="sm" c="dimmed">
           {beer.tagline}
         </Text>

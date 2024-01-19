@@ -12,7 +12,7 @@ export const Store = () => {
         {pesudoData.map(beer => {
           return (
             <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
-              <BeerCard beer={beer} isFavorite />
+              <BeerCard beer={beer} />
             </Grid.Col>
           );
         })}

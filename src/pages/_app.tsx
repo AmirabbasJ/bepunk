@@ -1,5 +1,6 @@
 import '@mantine/core/styles.css';
 
+import { ModalsProvider } from '@mantine/modals';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -14,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.ico" />
       </Head>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <ModalsProvider>
+          <Component {...pageProps} />
+        </ModalsProvider>
       </ThemeProvider>
     </>
   );

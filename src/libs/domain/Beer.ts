@@ -1,11 +1,18 @@
+type ParedFood = 'none' | 'pizza' | 'snack';
+
 export interface Beer {
   id: number;
   picture: string | null;
   name: string;
   tagline: string;
+  paredFood: ParedFood;
+  abv: number;
+  description: string;
+  price: string; // srm
+  isFavorite?: boolean;
 }
 
-export const pesudoData: Beer[] = [
+export const pesudoData = [
   {
     id: 1,
     name: 'Buzz',
@@ -42,4 +49,4 @@ export const pesudoData: Beer[] = [
     tagline: 'Mango IPA.',
     picture: null,
   },
-];
+] as Beer[];
