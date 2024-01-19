@@ -1,5 +1,4 @@
 export const pairedFood = {
-  none: 'none',
   pizza: 'pizza',
   steak: 'steak',
 } as const;

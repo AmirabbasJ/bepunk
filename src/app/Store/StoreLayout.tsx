@@ -1,6 +1,8 @@
 import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
+import { StoreNavbar } from './StoreNavbar';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -11,7 +13,7 @@ export const StoreLayout = ({ children }: Props) => {
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 200, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      navbar={{ width: 250, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Header>
@@ -20,11 +22,7 @@ export const StoreLayout = ({ children }: Props) => {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
+        <StoreNavbar />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>

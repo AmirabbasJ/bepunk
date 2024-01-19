@@ -8,7 +8,7 @@ export interface Beer {
   picture: string | null;
   name: string;
   tagline: string;
-  pairedFood: PairedFood;
+  pairedFood: PairedFood | null;
   abv: number;
   description: string;
   price: number; // srm
