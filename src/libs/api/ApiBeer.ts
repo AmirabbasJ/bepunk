@@ -7,7 +7,7 @@ export interface ApiBeer {
   description: string;
   image_url: string | null;
   abv: number;
-  srm: number;
+  srm: number | null;
   food_pairing: string[];
 }
 export type ApiBeers = ApiBeer[];
@@ -19,7 +19,7 @@ export const ApiBeer = z.object({
   description: z.string(),
   image_url: z.string().nullable(),
   abv: z.number(),
-  srm: z.number(),
+  srm: z.number().nullable(),
   food_pairing: z.array(z.string()),
 });
 

@@ -1,15 +1,16 @@
 import { Grid } from '@mantine/core';
 
-import { pesudoData } from '@/domain';
+import { useBeers } from '@/api';
 
 import { BeerCard } from '../../libs/design/BeerCard/BeerCard';
 import { StoreLayout } from './StoreLayout';
 
 export const Store = () => {
+  const { data } = useBeers();
   return (
     <StoreLayout>
       <Grid>
-        {pesudoData.map(beer => {
+        {data.map(beer => {
           return (
             <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
               <BeerCard beer={beer} />

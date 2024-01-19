@@ -3,8 +3,11 @@ import '@mantine/core/styles.css';
 import { ModalsProvider } from '@mantine/modals';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { ThemeProvider } from '@/design';
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -15,9 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.ico" />
       </Head>
       <ThemeProvider>
-        <ModalsProvider>
-          <Component {...pageProps} />
-        </ModalsProvider>
+        <QueryClientProvider client={queryClient}>
+          <ModalsProvider>
+            <Component {...pageProps} />
+          </ModalsProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </>
   );

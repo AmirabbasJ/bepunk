@@ -7,6 +7,7 @@
       "@/design": ["./src/libs/design/index.ts"],
       "@/components": ["./src/components/index.ts"],
       "@/domain": ["./src/libs/domain/index.ts"],
+      "@/api": ["./src/libs/api/index.ts"],
     },
     "strictNullChecks": true,
   },

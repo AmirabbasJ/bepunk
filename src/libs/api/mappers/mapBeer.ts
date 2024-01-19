@@ -11,7 +11,7 @@ export const mapBeer = (apiBeer: ApiBeer): Beer => ({
   tagline: apiBeer.tagline,
   pairedFood: mapPairedFood(apiBeer.food_pairing),
   description: apiBeer.description,
-  price: apiBeer.srm,
+  price: apiBeer.srm ?? 0,
   isFavorite: false,
 });
 
