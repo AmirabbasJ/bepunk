@@ -8,17 +8,17 @@ const fallbackImage = '/placeholder.png';
 
 type Props = Omit<ImageProps & NextImageProps, 'alt'> & { alt?: string };
 
-export const BeerImage = ({ src, h, w, ...rest }: Props) => {
+export const BeerImage = ({ src, width = 0, height = 0, ...rest }: Props) => {
   const [loading, setLoading] = useState(true);
   return (
-    <Skeleton w="100%" visible={loading}>
-      <Center h={h}>
+    <Skeleton miw={width} mih={height} visible={loading}>
+      <Center miw={width} mih={height}>
         <Image
           loading="lazy"
           onLoad={() => setLoading(false)}
           component={NextImage}
           src={src ?? fallbackImage}
-          width={50}
+          width={width}
           height={0}
           alt="beer"
           style={{ width: 'auto', height: 'auto' }}

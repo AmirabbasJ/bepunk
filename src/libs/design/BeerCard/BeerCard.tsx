@@ -1,6 +1,5 @@
 import type { CardProps } from '@mantine/core';
-import { ActionIcon, Card, Image, Stack, Text } from '@mantine/core';
-import { IconStar, IconStarFilled } from '@tabler/icons-react';
+import { Card, Stack, Text } from '@mantine/core';
 
 import type { Beer } from '@/domain';
 
@@ -32,7 +31,7 @@ export const BeerCard = ({ beer, ...rest }: Props) => {
       </Card.Section>
       <Stack gap="sm" align="center" justify="space-between" h="100%">
         <Text>{beer.name}</Text>
-        <BeerImage src={beer.picture} />
+        <BeerImage width={50} height={250} src={beer.picture} />
         <Text size="sm" c="dimmed">
           {beer.tagline}
         </Text>
