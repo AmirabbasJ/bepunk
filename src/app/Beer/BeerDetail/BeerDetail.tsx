@@ -47,7 +47,9 @@ export const BeerDetail = ({ id }: BeerDetailProps) => {
 
   return (
     <ResponsiveCard>
-      <BeerImage width={135} height={530} src={beer.picture} />
+      <Box>
+        <BeerImage width={135} height={530} src={beer.picture} />
+      </Box>
       <Stack gap="xl">
         <Stack gap="xs">
           <Title>
