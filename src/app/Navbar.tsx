@@ -3,11 +3,16 @@ import { IconHome, IconShoppingCart } from '@tabler/icons-react';
 
 import { useCartCache } from '@/cache';
 
-export const Navbar = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const Navbar = ({ children }: Props) => {
   const { cart: ids } = useCartCache();
   const cartItemsCount = ids.length;
   return (
     <Group h="100%" px="md">
+      {children}
       <Button component="a" href="/" leftSection={<IconHome />} variant="light">
         Home
       </Button>
