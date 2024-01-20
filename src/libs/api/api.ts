@@ -6,6 +6,7 @@ import type { Filter } from '@/filter';
 import { ApiBeer, ApiBeers } from './domain/ApiBeer';
 import { mapBeer, mapBeers } from './mappers/mapBeer';
 
+// NOTE: better to be in env
 const client = axios.create({
   baseURL: 'https://api.punkapi.com/v2/beers/',
 });
