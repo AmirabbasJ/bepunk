@@ -1,7 +1,6 @@
 import {
   Badge,
   Box,
-  Button,
   Card,
   Group,
   NumberFormatter,
@@ -11,11 +10,10 @@ import {
   Title,
   Tooltip,
 } from '@mantine/core';
-import { IconShoppingCart } from '@tabler/icons-react';
 
 import { useBeer } from '@/api';
-import { useFavoriteCache } from '@/cache';
-import { BeerImage, FavoriteButton } from '@/design';
+import { useCartCache, useFavoriteCache } from '@/cache';
+import { BeerImage, CartButton, FavoriteButton } from '@/design';
 import type { BeerId } from '@/domain';
 
 export interface BeerDetailProps {
@@ -42,8 +40,11 @@ const ResponsiveCard = ({ children }: { children: React.ReactNode }) => {
 export const BeerDetail = ({ id }: BeerDetailProps) => {
   const { data: beer } = useBeer(id);
   const { updateFavorites } = useFavoriteCache();
-
+  const { addToCart, removeFromCart, cart } = useCartCache();
   if (beer == null) return <Skeleton width="100%" height={530} />;
+
+  const isInCart = cart.includes(id);
+
   return (
     <ResponsiveCard>
       <BeerImage width={135} height={530} src={beer.picture} />
@@ -94,9 +95,13 @@ export const BeerDetail = ({ id }: BeerDetailProps) => {
           </Text>
         </Stack>
         <Box>
-          <Button leftSection={<IconShoppingCart />} color="green" radius="md">
-            Add to cart
-          </Button>
+          <CartButton
+            isAdded={isInCart}
+            onClick={() => {
+              if (isInCart) removeFromCart(id);
+              else addToCart(id);
+            }}
+          />
         </Box>
       </Stack>
     </ResponsiveCard>

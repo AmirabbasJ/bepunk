@@ -1,10 +1,26 @@
-import { ActionIcon } from '@mantine/core';
-import { IconShoppingCart } from '@tabler/icons-react';
+import type { ButtonProps } from '@mantine/core';
+import { Button } from '@mantine/core';
+import {
+  IconShoppingCartMinus,
+  IconShoppingCartPlus,
+} from '@tabler/icons-react';
 
-export const CartButton = () => {
+interface Props extends ButtonProps {
+  onClick?: VoidFunction;
+  isAdded?: boolean;
+}
+
+export const CartButton = ({ onClick, isAdded }: Props) => {
   return (
-    <ActionIcon color="green" variant="subtle" size="lg">
-      <IconShoppingCart />
-    </ActionIcon>
+    <Button
+      onClick={onClick}
+      leftSection={
+        isAdded ? <IconShoppingCartMinus /> : <IconShoppingCartPlus />
+      }
+      color={isAdded ? 'red' : 'green'}
+      radius="md"
+    >
+      {isAdded ? 'Remove from cart' : 'Add to cart'}
+    </Button>
   );
 };
