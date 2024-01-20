@@ -1,22 +1,17 @@
-import { Card, Center, Loader, Title } from '@mantine/core';
+import { Card, Title } from '@mantine/core';
 
 import { useCart } from '@/api';
 import { useFavoriteCache } from '@/cache';
+import { Loading } from '@/design';
 
 import { openBeerDetailModal } from '../../Beer';
 import { CartItem } from './CartItem';
-
-const Loading = () => (
-  <Center>
-    <Loader type="dots" size="xl" />
-  </Center>
-);
 
 export const CartItems = () => {
   const { updateFavorites } = useFavoriteCache();
   const { data: cart, loading } = useCart();
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading center />;
   if (cart.length === 0) return <Title>Nothing to show</Title>;
   const beers = cart;
   return (

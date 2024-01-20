@@ -1,20 +1,14 @@
-import { Center, Grid, Loader, Title } from '@mantine/core';
+import { Grid, Title } from '@mantine/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useBeers } from '@/api';
 import { useFavoriteCache } from '@/cache';
-import { BeerCard } from '@/design';
+import { BeerCard, Loading } from '@/design';
 import { useFilter } from '@/filter';
 
 import { openBeerDetailModal } from '../Beer';
 
 const perPage = 20;
-
-const Loading = () => (
-  <Center>
-    <Loader type="dots" size="xl" />
-  </Center>
-);
 
 export const Products = () => {
   const { filter } = useFilter();
@@ -26,7 +20,7 @@ export const Products = () => {
     perPage,
   });
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading center />;
   if (beers.flat().length === 0) return <Title>Nothing to show</Title>;
 
   return (
@@ -35,7 +29,7 @@ export const Products = () => {
       next={fetchNextPage}
       hasMore={!!hasNextPage}
       style={{ overflow: 'hidden' }}
-      loader={<Loading />}
+      loader={<Loading center />}
     >
       <Grid>
         {beers.flat().map(beer => {

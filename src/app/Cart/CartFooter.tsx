@@ -1,7 +1,8 @@
-import { Button, Group, Loader, NumberFormatter, Title } from '@mantine/core';
+import { Button, Group, NumberFormatter, Title } from '@mantine/core';
 import { IconShoppingCart } from '@tabler/icons-react';
 
 import { useCart } from '@/api';
+import { Loading } from '@/design';
 
 export const CartFooter = () => {
   const { totalPrice, loading } = useCart();
@@ -11,7 +12,7 @@ export const CartFooter = () => {
       <Group>
         <Title>Price:</Title>{' '}
         {loading ? (
-          <Loader type="dots" size="xl" />
+          <Loading />
         ) : (
           <Title c="green">
             <NumberFormatter
