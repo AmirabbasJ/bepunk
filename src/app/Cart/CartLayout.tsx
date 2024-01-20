@@ -1,14 +1,27 @@
-import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
+import {
+  ActionIcon,
+  AppShell,
+  Box,
+  Burger,
+  Button,
+  Group,
+  Skeleton,
+  ThemeIcon,
+  UnstyledButton,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconHome } from '@tabler/icons-react';
+import Image from 'next/image';
+
+import { CartButton } from '@/design';
 
 import { Navbar } from '../Navbar';
-import { StoreSidebar } from './StoreSidebar';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const StoreLayout = ({ children }: Props) => {
+export const CartLayout = ({ children }: Props) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -20,9 +33,7 @@ export const StoreLayout = ({ children }: Props) => {
       <AppShell.Header>
         <Navbar />
       </AppShell.Header>
-      <AppShell.Navbar p="md">
-        <StoreSidebar />
-      </AppShell.Navbar>
+
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
   );
