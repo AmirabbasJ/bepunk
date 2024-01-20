@@ -9,7 +9,17 @@ import {
 } from '@mantine/core';
 import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
 
-import { useFilter } from '@/filter';
+import { sortBy, sortType, useFilter } from '@/filter';
+
+const sortBySelect = {
+  abv: { label: 'Abv', value: sortBy.abv },
+  name: { label: 'Name', value: sortBy.name },
+} as const;
+
+const sortTypeSelect = {
+  asc: { label: 'asc', value: sortType.asc },
+  des: { label: 'des', value: sortType.des },
+} as const;
 
 const iconProps = {
   style: { width: rem(20), height: rem(20), display: 'block' },
@@ -32,14 +42,11 @@ export const Sort = () => {
           else
             addFilter({
               sortBy: item as any,
-              sortType: filter.sortType ?? 'asc',
+              sortType: filter.sortType ?? sortTypeSelect.asc.value,
             });
         }}
         label="Sort by:"
-        data={[
-          { label: 'Abv', value: 'abv' },
-          { label: 'Name', value: 'name' },
-        ]}
+        data={[sortBySelect.abv, sortBySelect.name]}
         placeholder="Sorting"
         clearable
         allowDeselect
@@ -63,20 +70,20 @@ export const Sort = () => {
             style={style}
             data={[
               {
-                value: 'asc',
+                value: sortTypeSelect.asc.value,
                 label: (
                   <Center>
                     <IconSortAscending {...iconProps} />
-                    <VisuallyHidden>asc</VisuallyHidden>
+                    <VisuallyHidden>{sortTypeSelect.asc.label}</VisuallyHidden>
                   </Center>
                 ),
               },
               {
-                value: 'des',
+                value: sortTypeSelect.des.value,
                 label: (
                   <Center>
                     <IconSortDescending {...iconProps} />
-                    <VisuallyHidden>des</VisuallyHidden>
+                    <VisuallyHidden>{sortTypeSelect.des.label}</VisuallyHidden>
                   </Center>
                 ),
               },

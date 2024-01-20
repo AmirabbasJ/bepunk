@@ -25,7 +25,7 @@ export const BeerCard = ({
       radius="md"
       h="100%"
       withBorder
-      bg="gray.1"
+      bg="gray.0"
       style={{ cursor: 'pointer', userSelect: 'none' }}
       onClick={onClick}
       {...rest}

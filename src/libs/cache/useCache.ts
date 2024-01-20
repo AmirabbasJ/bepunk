@@ -43,6 +43,7 @@ export const useCache = <T>({
 
   useEffect(() => {
     setData(getData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setCacheData = (newData: T) => {

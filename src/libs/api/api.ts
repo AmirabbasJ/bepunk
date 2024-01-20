@@ -1,12 +1,12 @@
 import axios from 'axios';
-import type { Primitive } from 'zod';
 
 import type { Beer, BeerId } from '@/domain';
 import type { Filter } from '@/filter';
 
-import { ApiBeer, ApiBeers } from './ApiBeer';
+import { ApiBeer, ApiBeers } from './domain/ApiBeer';
 import { mapBeer, mapBeers } from './mappers/mapBeer';
 
+// NOTE: better to be in env
 const client = axios.create({
   baseURL: 'https://api.punkapi.com/v2/beers/',
 });
@@ -17,14 +17,32 @@ interface Query {
   limit?: number;
   filter?: Filter;
 }
+const encode = (
+  key: string,
+  value: any[] | boolean | number | string | null | undefined,
+): string =>
+  Array.isArray(value)
+    ? `${key}=${value.join('|')}`
+    : value == null
+      ? ''
+      : `${key}=${value.toString()}`;
 
 const encodeQury = ({ filter, page, limit, ids }: Query) =>
-  `?${page ? `page=${page}` : ''}${limit ? `&per_page=${limit}` : ''}${filter?.food ? `&food=${filter.food}` : ''}${ids == null ? '' : `&ids=${ids.join('|')}`}`;
+  [
+    '?',
+    encode('page', page),
+    encode('per_page', limit),
+    encode('food', filter?.food),
+    encode('ids', ids),
+  ]
+    .filter(t => t !== '')
+    .join('&');
 
 export const getBeers = async (
   query: Query,
 ): Promise<{ beers: Beer[]; next: number | undefined }> => {
   const { data } = await client.get(`/${encodeQury(query)}`);
+  console.log(encodeQury(query));
 
   const beers = await ApiBeers.parseAsync(data);
   const mappedBeers = mapBeers(beers);

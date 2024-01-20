@@ -1,14 +1,14 @@
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 
 import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from '@mantine/notifications';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { QueryProvider } from '@/api';
 import { CartCacheProvider, FavoriteCacheProvider } from '@/cache';
 import { ThemeProvider } from '@/design';
-
-const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,15 +19,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.ico" />
       </Head>
       <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
+        <QueryProvider>
           <FavoriteCacheProvider>
             <CartCacheProvider>
               <ModalsProvider>
+                <Notifications position="bottom-left" />
                 <Component {...pageProps} />
               </ModalsProvider>
             </CartCacheProvider>
           </FavoriteCacheProvider>
-        </QueryClientProvider>
+        </QueryProvider>
       </ThemeProvider>
     </>
   );

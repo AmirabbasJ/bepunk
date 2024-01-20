@@ -4,13 +4,15 @@
   "compilerOptions": {
     "target": "ESNext",
     "paths": {
+      "@/app": ["./src/app/index.ts"],
       "@/design": ["./src/libs/design/index.ts"],
       "@/components": ["./src/components/index.ts"],
       "@/domain": ["./src/libs/domain/index.ts"],
       "@/api": ["./src/libs/api/index.ts"],
       "@/filter": ["./src/libs/filter/index.ts"],
-      "@/searchParam": ["./src/libs/searchParam/index.ts"],
+      "@/search-param": ["./src/libs/search-param/index.ts"],
       "@/cache": ["./src/libs/cache/index.ts"],
+      "@/utls": ["./src/libs/utls/index.ts"],
     },
     "strictNullChecks": true,
   },

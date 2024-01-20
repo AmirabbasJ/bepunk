@@ -1,6 +1,6 @@
 import type { Beer } from '@/domain';
 
-import type { ApiBeer, ApiBeers } from '../ApiBeer';
+import type { ApiBeer, ApiBeers } from '../domain/ApiBeer';
 import { mapPairedFood } from './mapPairedFood';
 
 export const mapBeer = (apiBeer: ApiBeer): Beer => ({

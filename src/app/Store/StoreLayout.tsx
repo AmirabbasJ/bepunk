@@ -1,4 +1,4 @@
-import { AppShell } from '@mantine/core';
+import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { Navbar } from '../Navbar';
@@ -14,11 +14,17 @@ export const StoreLayout = ({ children }: Props) => {
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 250, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      navbar={{
+        width: 250,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
       padding="md"
     >
       <AppShell.Header>
-        <Navbar />
+        <Navbar>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        </Navbar>
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <StoreSidebar />

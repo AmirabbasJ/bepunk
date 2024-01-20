@@ -6,11 +6,7 @@ import type { Beer } from '@/domain';
 import { getBeer } from '../api';
 
 export const useBeer = (id: number) => {
-  const {
-    data = null,
-    error,
-    isLoading,
-  } = useQuery({
+  const { data = null, isLoading } = useQuery({
     queryKey: ['beers', 'detail', id],
     queryFn: () => getBeer(id),
   });
