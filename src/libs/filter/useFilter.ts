@@ -1,4 +1,4 @@
-import { useSearchParams } from '@/searchParam';
+import { useSearchParams } from '@/search-param';
 
 import { Filter } from './Filter';
 
