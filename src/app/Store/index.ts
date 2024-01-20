@@ -1,1 +1,2 @@
-export * from './Store';
+export * from './Products';
+export * from './StoreLayout';
