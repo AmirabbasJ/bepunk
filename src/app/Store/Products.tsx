@@ -1,5 +1,4 @@
 import { Center, Grid, Loader, Title } from '@mantine/core';
-import { Fragment } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useBeers } from '@/api';
@@ -38,25 +37,21 @@ export const Products = () => {
       style={{ overflow: 'hidden' }}
       loader={<Loading />}
     >
-      {beers.map((page, i) => (
-        <Fragment key={i}>
-          <Grid>
-            {page.map(beer => {
-              return (
-                <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
-                  <BeerCard
-                    onClick={() => {
-                      openBeerDetailModal({ id: beer.id });
-                    }}
-                    beer={beer}
-                    onFavoriteToggle={() => updateFavorites(beer.id)}
-                  />
-                </Grid.Col>
-              );
-            })}
-          </Grid>
-        </Fragment>
-      ))}
+      <Grid>
+        {beers.flat().map(beer => {
+          return (
+            <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
+              <BeerCard
+                onClick={() => {
+                  openBeerDetailModal({ id: beer.id });
+                }}
+                beer={beer}
+                onFavoriteToggle={() => updateFavorites(beer.id)}
+              />
+            </Grid.Col>
+          );
+        })}
+      </Grid>
     </InfiniteScroll>
   );
 };
