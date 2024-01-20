@@ -4,25 +4,22 @@ import {
   Button,
   Card,
   Group,
-  Image,
   NumberFormatter,
+  Skeleton,
   Stack,
   Text,
-  ThemeIcon,
   Title,
   Tooltip,
 } from '@mantine/core';
-import { IconPizza, IconShoppingCart } from '@tabler/icons-react';
-import NextImage from 'next/image';
-import { useState } from 'react';
+import { IconShoppingCart } from '@tabler/icons-react';
 
-import type { Beer } from '@/domain';
-
-import { BeerImage } from '../BeerImage';
-import { FavoriteButton } from '../FavoriteButton';
+import { useBeer } from '@/api';
+import { useFavoriteCache } from '@/cache';
+import { BeerImage, FavoriteButton } from '@/design';
+import type { BeerId } from '@/domain';
 
 export interface BeerDetailProps {
-  beer: Beer;
+  id: BeerId;
 }
 
 const ResponsiveCard = ({ children }: { children: React.ReactNode }) => {
@@ -42,14 +39,22 @@ const ResponsiveCard = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const BeerDetail = ({ beer }: BeerDetailProps) => {
+export const BeerDetail = ({ id }: BeerDetailProps) => {
+  const { data: beer } = useBeer(id);
+  const { updateFavorites } = useFavoriteCache();
+
+  if (beer == null) return <Skeleton width="100%" height={530} />;
   return (
     <ResponsiveCard>
       <BeerImage width={135} height={530} src={beer.picture} />
       <Stack gap="xl">
         <Stack gap="xs">
           <Title>
-            {beer.name} <FavoriteButton isFavorie={beer.isFavorite} />
+            {beer.name}{' '}
+            <FavoriteButton
+              isFavorie={beer.isFavorite}
+              onToggle={() => updateFavorites(id)}
+            />
             <Text c="dimmed">{beer.tagline}</Text>
           </Title>
           <Group>

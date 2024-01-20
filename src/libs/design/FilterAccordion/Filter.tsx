@@ -15,7 +15,6 @@ export const Filter = ({ value, label, ...rest }: Props) => {
     throw new Error('Filter cannot be used outside FilterAccordion component');
 
   const { setValue, currentValue, loading } = ctx;
-  console.log({ loading });
 
   return (
     <Checkbox
@@ -25,6 +24,7 @@ export const Filter = ({ value, label, ...rest }: Props) => {
       onChange={() => {
         setValue(value);
       }}
+      style={{ cursor: 'pointer' }}
       {...rest}
     />
   );

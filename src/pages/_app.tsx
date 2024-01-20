@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { FavoriteCacheProvider } from '@/cache';
 import { ThemeProvider } from '@/design';
 
 const queryClient = new QueryClient();
@@ -19,9 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <ModalsProvider>
-            <Component {...pageProps} />
-          </ModalsProvider>
+          <FavoriteCacheProvider>
+            <ModalsProvider>
+              <Component {...pageProps} />
+            </ModalsProvider>
+          </FavoriteCacheProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </>

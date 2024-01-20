@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import type { Beer } from '@/domain';
+import type { Beer, BeerId } from '@/domain';
 import type { Filter } from '@/filter';
 
-import { ApiBeers } from './ApiBeer';
-import { mapBeers } from './mappers/mapBeer';
+import { ApiBeer, ApiBeers } from './ApiBeer';
+import { mapBeer, mapBeers } from './mappers/mapBeer';
 
 const client = axios.create({
   baseURL: 'https://api.punkapi.com/v2/beers/',
@@ -21,5 +21,13 @@ const encodeQury = ({ filter, page = 1 }: Query) =>
 export const getBeers = async (query: Query): Promise<Beer[]> => {
   const { data } = await client.get(`/${encodeQury(query)}`);
   const beers = await ApiBeers.parseAsync(data);
-  return mapBeers(beers);
+  const mappedBeers = mapBeers(beers);
+  return mappedBeers;
+};
+
+export const getBeer = async (id: BeerId): Promise<Beer | null> => {
+  const { data } = await client.get(`/${id}`);
+  const beer = await ApiBeer.optional().parseAsync(data?.[0]);
+  if (beer == null) return null;
+  return mapBeer(beer);
 };

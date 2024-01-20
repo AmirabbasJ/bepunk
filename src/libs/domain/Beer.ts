@@ -3,8 +3,9 @@ import { z } from 'zod';
 import type { PairedFood } from './PairedFood';
 import { pairedFoodParser } from './PairedFood';
 
+export type BeerId = number;
 export interface Beer {
-  id: number;
+  id: BeerId;
   picture: string | null;
   name: string;
   tagline: string;

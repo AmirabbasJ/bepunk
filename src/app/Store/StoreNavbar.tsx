@@ -25,7 +25,6 @@ export const StoreNavbar = () => {
         title="Food"
         value={filter.food}
         onChange={food => {
-          console.log(food);
           addFilter({
             food: food as PairedFood | undefined,
           });

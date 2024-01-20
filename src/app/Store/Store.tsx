@@ -1,9 +1,11 @@
 import { Grid, Skeleton } from '@mantine/core';
 
 import { useBeers } from '@/api';
+import { useFavoriteCache } from '@/cache';
 import { BeerCard } from '@/design';
 import { useFilter } from '@/filter';
 
+import { openBeerDetailModal } from '../BeerDetail';
 import { StoreLayout } from './StoreLayout';
 
 const loadingList = Array.from({ length: 20 }).map((_, i) => (
@@ -14,6 +16,7 @@ const loadingList = Array.from({ length: 20 }).map((_, i) => (
 
 export const Store = () => {
   const { filter } = useFilter();
+  const { updateFavorites } = useFavoriteCache();
   const { data, loading } = useBeers({ filter });
   return (
     <StoreLayout>
@@ -23,7 +26,13 @@ export const Store = () => {
           : data.map(beer => {
               return (
                 <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
-                  <BeerCard beer={beer} />
+                  <BeerCard
+                    onClick={() => {
+                      openBeerDetailModal({ id: beer.id });
+                    }}
+                    beer={beer}
+                    onFavoriteToggle={() => updateFavorites(beer.id)}
+                  />
                 </Grid.Col>
               );
             })}

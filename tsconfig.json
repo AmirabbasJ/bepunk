@@ -10,6 +10,7 @@
       "@/api": ["./src/libs/api/index.ts"],
       "@/filter": ["./src/libs/filter/index.ts"],
       "@/searchParam": ["./src/libs/searchParam/index.ts"],
+      "@/cache": ["./src/libs/cache/index.ts"],
     },
     "strictNullChecks": true,
   },

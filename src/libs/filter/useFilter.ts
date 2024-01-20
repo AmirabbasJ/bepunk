@@ -10,8 +10,6 @@ export const useFilter = () => {
   const filter = result.success ? result.data : {};
 
   const addFilter = (partialFilter: Filter) => {
-    console.log(partialFilter);
-
     const newFilter = { ...filter, ...partialFilter };
     addSearchParam(newFilter);
   };
