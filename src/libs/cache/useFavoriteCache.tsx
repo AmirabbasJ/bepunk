@@ -39,8 +39,6 @@ export const useFavoriteCache = () => {
   const favorites = data ?? [];
 
   const updateFavorites = (id: number) => {
-    console.log({ favorites });
-
     const newFavorites = favorites.includes(id)
       ? favorites.filter(i => i !== id)
       : [...favorites, id];

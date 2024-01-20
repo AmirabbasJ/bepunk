@@ -4,11 +4,12 @@ import { IconStarFilled, IconStarOff } from '@tabler/icons-react';
 import { useFilter } from '@/filter';
 
 export const FavoriteFilter = () => {
-  const { addFilter, loading } = useFilter();
+  const { addFilter, loading, filter } = useFilter();
 
   return (
     <Switch
       disabled={loading}
+      checked={filter.favorites}
       size="md"
       onChange={e => {
         addFilter({
