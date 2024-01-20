@@ -14,5 +14,6 @@ module.exports = init({
     'react/no-unused-prop-types': 'off',
     // NOTE: Lot of false positive in props
     'react/jsx-no-leaked-render': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
   },
 });

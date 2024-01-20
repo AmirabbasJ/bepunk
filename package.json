@@ -13,9 +13,15 @@
   "dependencies": {
     "@mantine/core": "7.4.2",
     "@mantine/hooks": "7.4.2",
+    "@mantine/modals": "7.4.2",
+    "@tabler/icons-react": "2.46.0",
+    "axios": "1.6.5",
     "next": "14.0.4",
     "react": "18",
-    "react-dom": "18"
+    "react-dom": "18",
+    "react-infinite-scroll-component": "6.1.0",
+    "react-query": "3.39.3",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@fullstacksjs/eslint-config": "10.9.0",
