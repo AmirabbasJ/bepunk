@@ -5,7 +5,7 @@ import { useFavoriteCache } from '@/cache';
 import { BeerCard } from '@/design';
 import { useFilter } from '@/filter';
 
-import { openBeerDetailModal } from '../BeerDetail';
+import { openBeerDetailModal } from '../Beer';
 import { StoreLayout } from './StoreLayout';
 
 const loadingList = Array.from({ length: 20 }).map((_, i) => (
@@ -16,8 +16,8 @@ const loadingList = Array.from({ length: 20 }).map((_, i) => (
 
 export const Store = () => {
   const { filter } = useFilter();
-  const { updateFavorites } = useFavoriteCache();
-  const { data, loading } = useBeers({ filter });
+  const { favorites, updateFavorites } = useFavoriteCache();
+  const { data, loading } = useBeers({ filter, ids: favorites });
   return (
     <StoreLayout>
       <Grid>

@@ -4,8 +4,9 @@ import {
 } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import type { Primitive } from 'zod';
 
-type SearchParam = Record<string, string | null | undefined>;
+type SearchParam = Record<string, Primitive | string | null | undefined>;
 
 const getSearchParams = (urlParams: URLSearchParams): SearchParam => {
   const values: SearchParam = {};
@@ -35,7 +36,7 @@ export const useSearchParams = () => {
       const params = new URLSearchParams(searchParams.toString());
       Object.entries(data).forEach(([key, value]) => {
         if (value == null) params.delete(key);
-        else params.set(key, value);
+        else params.set(key, value.toString());
       });
       return router.push(`${pathname}?${params.toString()}`);
     },

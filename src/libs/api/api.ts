@@ -12,11 +12,12 @@ const client = axios.create({
 
 interface Query {
   page?: number;
+  ids?: BeerId[];
   filter: Filter;
 }
 
-const encodeQury = ({ filter, page = 1 }: Query) =>
-  `?page=${page}&${filter.food ? `food=${filter.food}` : ''}`;
+const encodeQury = ({ filter, page = 1, ids }: Query) =>
+  `?page=${page}&${filter.food ? `food=${filter.food}` : ''}&${filter.favorites && ids?.length !== 0 ? `ids=${ids!.join('|')}` : ''}`;
 
 export const getBeers = async (query: Query): Promise<Beer[]> => {
   const { data } = await client.get(`/${encodeQury(query)}`);
