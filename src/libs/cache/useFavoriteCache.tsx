@@ -1,13 +1,13 @@
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext } from 'react';
 import { z } from 'zod';
 
-import type { BeerId } from '@/domain';
+import { BeerId } from '@/domain';
 
 import type { Cache } from './useCache';
 import { useCache } from './useCache';
 
 const favoritesCacheId = 'favorites';
-const favoritesValidator = z.array(z.number());
+const favoritesValidator = z.array(BeerId);
 
 type Favorites = BeerId[];
 type FavoriteCacheCtxProps = Cache<Favorites>;

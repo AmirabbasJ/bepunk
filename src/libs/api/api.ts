@@ -14,12 +14,14 @@ interface Query {
   page?: number;
   ids?: BeerId[];
   limit: number;
-  filter: Filter;
+  filter?: Filter;
 }
 
-// NOTE abstract to lib
+// FiXME abstract to lib
 const encodeQury = ({ filter, page = 1, limit, ids }: Query) =>
-  `?page=${page}&per_page=${limit}${filter.food ? `&food=${filter.food}` : ''}${filter.favorites && ids?.length !== 0 ? `&ids=${ids!.join('|')}` : filter.favorites ? `&ids=` : ''}`;
+  filter == null
+    ? ''
+    : `?page=${page}&per_page=${limit}${filter.food ? `&food=${filter.food}` : ''}${filter.favorites && ids?.length !== 0 ? `&ids=${ids!.join('|')}` : filter.favorites ? `&ids=` : ''}`;
 
 export const getBeers = async (
   query: Query,

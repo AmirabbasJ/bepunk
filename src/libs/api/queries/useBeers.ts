@@ -7,7 +7,7 @@ import type { Filter } from '@/filter';
 import { getBeers } from '../api';
 
 interface BeerConfig {
-  filter: Filter;
+  filter?: Filter;
   perPage?: number;
   ids?: BeerId[];
 }
@@ -19,7 +19,7 @@ export const useBeers = ({
   ids,
 }: BeerConfig) => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['beers', 'list', !filter.favorites ? null : ids, filter],
+    queryKey: ['beers', 'list', filter?.favorites ? null : ids, filter],
     queryFn: ({ pageParam = 1 }) =>
       getBeers({ filter, ids, page: pageParam, limit: perPage }),
     getNextPageParam: prev => {

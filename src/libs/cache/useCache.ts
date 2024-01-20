@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { z } from 'zod';
 
 const Cache = <T>(dataValidator: z.ZodType<T>) =>
@@ -18,12 +18,6 @@ export interface Cache<T> {
   setData: (d: T) => void;
   reset: VoidFunction;
 }
-
-// const CacheContext = createContext(null);
-
-// export const CacheProvider = () => {
-
-// }
 
 export const useCache = <T>({
   name,
@@ -50,8 +44,6 @@ export const useCache = <T>({
   useEffect(() => {
     setData(getData());
   }, []);
-
-  // console.log('called',data);
 
   const setCacheData = (newData: T) => {
     localStorage.setItem(
