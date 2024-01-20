@@ -35,8 +35,6 @@ export const useBeers = ({
     ),
   );
 
-  console.log(favorites, pages);
-
   const length = pages.reduce((counter, page) => {
     return counter + page.beers.length * perPage;
   }, perPage);

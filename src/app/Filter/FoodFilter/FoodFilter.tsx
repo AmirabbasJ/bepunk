@@ -19,7 +19,7 @@ export const FoodFilter = () => {
       loading={loading}
       id="food"
       title="Food"
-      value={filter.food}
+      value={filter.food ?? undefined}
       onChange={food => {
         addFilter({
           food: food as PairedFood | undefined,

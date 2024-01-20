@@ -1,14 +1,23 @@
 import { Stack, Title } from '@mantine/core';
 
 import { FavoriteFilter, FoodFilter } from '../Filter';
+import { Sort } from '../Sort';
 
 export const StoreNavbar = () => {
   return (
-    <Stack>
-      <Title>Filters</Title>
+    <Stack gap="xl">
       <Stack>
-        <FoodFilter />
-        <FavoriteFilter />
+        <Title>Sort</Title>
+        <Stack>
+          <Sort />
+        </Stack>
+      </Stack>
+      <Stack>
+        <Title>Filters</Title>
+        <Stack>
+          <FoodFilter />
+          <FavoriteFilter />
+        </Stack>
       </Stack>
     </Stack>
   );
