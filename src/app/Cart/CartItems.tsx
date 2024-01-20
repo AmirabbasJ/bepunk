@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useBeers } from '@/api';
-import { useFavoriteCache } from '@/cache';
+import { useCartCache, useFavoriteCache } from '@/cache';
 import { BeerCard } from '@/design';
 import { useFilter } from '@/filter';
 
@@ -18,43 +18,32 @@ const Loading = () => (
 );
 
 export const CartItems = () => {
-  const { favorites, updateFavorites } = useFavoriteCache();
+  const { updateFavorites } = useFavoriteCache();
+  const { cart } = useCartCache();
 
-  const { pages, fetchNextPage, hasNextPage, loading, length } = useBeers({
-    ids: favorites,
-    perPage,
+  const { pages, loading } = useBeers({
+    ids: cart,
   });
+  console.log(pages);
 
   if (loading) return <Loading />;
   if (pages.flat().length === 0) return <Title>Nothing to show</Title>;
-
+  const beers = pages.flat();
   return (
-    <InfiniteScroll
-      dataLength={length}
-      next={fetchNextPage}
-      hasMore={!!hasNextPage}
-      style={{ overflow: 'hidden' }}
-      loader={<Loading />}
-    >
-      {pages.map((page, i) => (
-        <Fragment key={i}>
-          <Grid>
-            {page.map(beer => {
-              return (
-                <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
-                  <BeerCard
-                    onClick={() => {
-                      openBeerDetailModal({ id: beer.id });
-                    }}
-                    beer={beer}
-                    onFavoriteToggle={() => updateFavorites(beer.id)}
-                  />
-                </Grid.Col>
-              );
-            })}
-          </Grid>
-        </Fragment>
-      ))}
-    </InfiniteScroll>
+    <Grid>
+      {beers.map(beer => {
+        return (
+          <Grid.Col key={beer.id} span={{ sm: 6, md: 4, lg: 3 }}>
+            <BeerCard
+              onClick={() => {
+                openBeerDetailModal({ id: beer.id });
+              }}
+              beer={beer}
+              onFavoriteToggle={() => updateFavorites(beer.id)}
+            />
+          </Grid.Col>
+        );
+      })}
+    </Grid>
   );
 };

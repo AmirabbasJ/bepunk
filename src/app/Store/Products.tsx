@@ -23,7 +23,7 @@ export const Products = () => {
 
   const { pages, fetchNextPage, hasNextPage, loading, length } = useBeers({
     filter,
-    ids: favorites,
+    ids: filter.favorites ? favorites : null,
     perPage,
   });
 
