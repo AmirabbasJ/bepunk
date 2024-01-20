@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
 
-import { useFilter } from '../../libs/filter';
+import { useFilter } from '@/filter';
 
 const iconProps = {
   style: { width: rem(20), height: rem(20), display: 'block' },

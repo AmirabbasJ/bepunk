@@ -7,7 +7,7 @@ import { useFavoriteCache } from '@/cache';
 import { BeerCard } from '@/design';
 import { useFilter } from '@/filter';
 
-import { openBeerDetailModal } from '../BeerDetail';
+import { openBeerDetailModal } from '../Beer';
 
 const perPage = 20;
 
@@ -17,13 +17,13 @@ const Loading = () => (
   </Center>
 );
 
-export const BeerList = () => {
+export const Products = () => {
   const { filter } = useFilter();
   const { favorites, updateFavorites } = useFavoriteCache();
 
   const { pages, fetchNextPage, hasNextPage, loading, length } = useBeers({
     filter,
-    ids: favorites,
+    ids: filter.favorites ? favorites : null,
     perPage,
   });
 

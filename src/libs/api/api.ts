@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { Primitive } from 'zod';
 
 import type { Beer, BeerId } from '@/domain';
 import type { Filter } from '@/filter';
@@ -12,25 +13,28 @@ const client = axios.create({
 
 interface Query {
   page?: number;
-  ids?: BeerId[];
-  limit: number;
-  filter: Filter;
+  ids?: BeerId[] | null;
+  limit?: number;
+  filter?: Filter;
 }
 
-// NOTE abstract to lib
-const encodeQury = ({ filter, page = 1, limit, ids }: Query) =>
-  `?page=${page}&per_page=${limit}${filter.food ? `&food=${filter.food}` : ''}${filter.favorites && ids?.length !== 0 ? `&ids=${ids!.join('|')}` : filter.favorites ? `&ids=` : ''}`;
+const encodeQury = ({ filter, page, limit, ids }: Query) =>
+  `?${page ? `page=${page}` : ''}${limit ? `&per_page=${limit}` : ''}${filter?.food ? `&food=${filter.food}` : ''}${ids == null ? '' : `&ids=${ids.join('|')}`}`;
 
 export const getBeers = async (
   query: Query,
 ): Promise<{ beers: Beer[]; next: number | undefined }> => {
-  const { page = 1 } = query;
   const { data } = await client.get(`/${encodeQury(query)}`);
+
   const beers = await ApiBeers.parseAsync(data);
   const mappedBeers = mapBeers(beers);
+  const withPage = query.page != null;
   const isLastPage = beers.length === 0;
 
-  return { beers: mappedBeers, next: isLastPage ? undefined : page + 1 };
+  return {
+    beers: mappedBeers,
+    next: isLastPage || !withPage ? undefined : query.page! + 1,
+  };
 };
 
 export const getBeer = async (id: BeerId): Promise<Beer | null> => {

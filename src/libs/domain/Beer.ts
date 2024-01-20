@@ -4,6 +4,8 @@ import type { PairedFood } from './PairedFood';
 import { pairedFoodParser } from './PairedFood';
 
 export type BeerId = number;
+export const BeerId = z.number();
+
 export interface Beer {
   id: BeerId;
   picture: string | null;
@@ -17,7 +19,7 @@ export interface Beer {
 }
 
 const Beer = z.object({
-  id: z.number(),
+  id: BeerId,
   name: z.string(),
   picture: z.string().url().nullable(),
   tagline: z.string(),

@@ -7,20 +7,15 @@ import type { Filter } from '@/filter';
 import { getBeers } from '../api';
 
 interface BeerConfig {
-  filter: Filter;
+  filter?: Filter;
   perPage?: number;
-  ids?: BeerId[];
+  ids: BeerId[] | null;
 }
-export const defaultPerpage = 20;
 
-export const useBeers = ({
-  filter,
-  perPage = defaultPerpage,
-  ids,
-}: BeerConfig) => {
+export const useBeers = ({ filter, perPage, ids }: BeerConfig) => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['beers', 'list', !filter.favorites ? null : ids, filter],
-    queryFn: ({ pageParam = 1 }) =>
+    queryKey: ['beers', 'list', ids, filter],
+    queryFn: ({ pageParam = perPage == null ? undefined : 1 }) =>
       getBeers({ filter, ids, page: pageParam, limit: perPage }),
     getNextPageParam: prev => {
       return prev.next;
@@ -35,9 +30,12 @@ export const useBeers = ({
     ),
   );
 
-  const length = pages.reduce((counter, page) => {
-    return counter + page.beers.length * perPage;
-  }, perPage);
+  const length =
+    perPage == null
+      ? 0
+      : pages.reduce((counter, page) => {
+          return counter + page.beers.length * perPage;
+        }, perPage);
 
   return {
     pages: withFavorites,

@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { FavoriteCacheProvider } from '@/cache';
+import { CartCacheProvider, FavoriteCacheProvider } from '@/cache';
 import { ThemeProvider } from '@/design';
 
 const queryClient = new QueryClient();
@@ -21,9 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
           <FavoriteCacheProvider>
-            <ModalsProvider>
-              <Component {...pageProps} />
-            </ModalsProvider>
+            <CartCacheProvider>
+              <ModalsProvider>
+                <Component {...pageProps} />
+              </ModalsProvider>
+            </CartCacheProvider>
           </FavoriteCacheProvider>
         </QueryClientProvider>
       </ThemeProvider>
