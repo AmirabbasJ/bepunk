@@ -1,4 +1,4 @@
-import { CartItems } from './CartItems';
+import { CartItems } from './CartItems/CartItems';
 import { CartLayout } from './CartLayout';
 
 export const Cart = () => {
