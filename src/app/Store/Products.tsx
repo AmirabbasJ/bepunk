@@ -21,14 +21,14 @@ export const Products = () => {
   const { filter } = useFilter();
   const { favorites, updateFavorites } = useFavoriteCache();
 
-  const { pages, fetchNextPage, hasNextPage, loading, length } = useBeers({
+  const { beers, fetchNextPage, hasNextPage, loading, length } = useBeers({
     filter,
     ids: filter.favorites ? favorites : null,
     perPage,
   });
 
   if (loading) return <Loading />;
-  if (pages.flat().length === 0) return <Title>Nothing to show</Title>;
+  if (beers.flat().length === 0) return <Title>Nothing to show</Title>;
 
   return (
     <InfiniteScroll
@@ -38,7 +38,7 @@ export const Products = () => {
       style={{ overflow: 'hidden' }}
       loader={<Loading />}
     >
-      {pages.map((page, i) => (
+      {beers.map((page, i) => (
         <Fragment key={i}>
           <Grid>
             {page.map(beer => {

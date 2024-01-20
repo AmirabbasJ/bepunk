@@ -11,6 +11,8 @@
       "@/filter": ["./src/libs/filter/index.ts"],
       "@/searchParam": ["./src/libs/searchParam/index.ts"],
       "@/cache": ["./src/libs/cache/index.ts"],
+
+      "@/utls": ["./src/libs/utls/index.ts"],
     },
     "strictNullChecks": true,
   },

@@ -1,24 +1,27 @@
-const SortType = {
+import { chunkOf } from './chunkOf';
+
+export const SortType = {
   Asc: 'asc',
   Des: 'des',
 } as const;
 
 type SortType = (typeof SortType)[keyof typeof SortType];
 
-interface Config<T> {
-  by: T;
+interface Config {
+  by: string;
   type: SortType;
 }
 
-export const sort = <T extends string, K>(
-  data: Record<T, K>[],
-  { by, type }: Config<T>,
-): Record<T, K>[] => {
-  const d = [...data];
+export const sort = <T extends Record<string, any>>(
+  data: T[][],
+  { by, type }: Config,
+): T[][] => {
+  const chunks = data.length;
+  const d = data.flat();
   d.sort((first, second) => {
     const a = type === 'asc' ? first : second;
     const b = type === 'asc' ? second : first;
     return a[by] < b[by] ? -1 : a[by] === b[by] ? 0 : 1;
   });
-  return d;
+  return chunkOf(d, chunks);
 };

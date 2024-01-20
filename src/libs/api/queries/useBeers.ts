@@ -4,6 +4,7 @@ import { useFavoriteCache } from '@/cache';
 import type { BeerId } from '@/domain';
 import type { Filter } from '@/filter';
 
+import { sort } from '../../utils/sort';
 import { getBeers } from '../api';
 
 interface BeerConfig {
@@ -24,8 +25,17 @@ export const useBeers = ({ filter, perPage, ids }: BeerConfig) => {
 
   const { favorites } = useFavoriteCache();
   const pages = data?.pages ?? [];
-  const withFavorites = pages.map(d =>
-    d.beers.map(beer =>
+  const rawBeers = pages.map(p => p.beers);
+  const shouldSort = filter?.sortBy != null;
+  // if(filter?.sortBy)
+  const sortedBeers = shouldSort
+    ? sort(rawBeers, {
+        by: filter.sortBy!,
+        type: filter.sortType!,
+      })
+    : rawBeers;
+  const beers = sortedBeers.map(d =>
+    d.map(beer =>
       favorites.includes(beer.id) ? { ...beer, isFavorite: true } : beer,
     ),
   );
@@ -38,7 +48,7 @@ export const useBeers = ({ filter, perPage, ids }: BeerConfig) => {
         }, perPage);
 
   return {
-    pages: withFavorites,
+    beers,
     loading: isLoading,
     fetchNextPage,
     hasNextPage,
