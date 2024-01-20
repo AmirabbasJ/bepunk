@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { Beer, BeerId } from '@/domain';
 import type { Filter } from '@/filter';
 
-import { ApiBeer, ApiBeers } from './ApiBeer';
+import { ApiBeer, ApiBeers } from './domain/ApiBeer';
 import { mapBeer, mapBeers } from './mappers/mapBeer';
 
 const client = axios.create({
