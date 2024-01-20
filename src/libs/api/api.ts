@@ -14,7 +14,7 @@ const client = axios.create({
 interface Query {
   page?: number;
   ids?: BeerId[] | null;
-  limit?: number;
+  limit: number;
   filter?: Filter;
 }
 const encode = (
@@ -42,12 +42,11 @@ export const getBeers = async (
   query: Query,
 ): Promise<{ beers: Beer[]; next: number | undefined }> => {
   const { data } = await client.get(`/${encodeQury(query)}`);
-  console.log(encodeQury(query));
 
   const beers = await ApiBeers.parseAsync(data);
   const mappedBeers = mapBeers(beers);
   const withPage = query.page != null;
-  const isLastPage = beers.length === 0;
+  const isLastPage = beers.length === 0 || beers.length < query.limit;
 
   return {
     beers: mappedBeers,

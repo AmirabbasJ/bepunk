@@ -1,5 +1,6 @@
 import { ActionIcon, Button, Group, Indicator } from '@mantine/core';
 import { IconHome, IconShoppingCart } from '@tabler/icons-react';
+import Link from 'next/link';
 
 import { useCartCache } from '@/cache';
 
@@ -13,7 +14,12 @@ export const Navbar = ({ children }: Props) => {
   return (
     <Group h="100%" px="md">
       {children}
-      <Button component="a" href="/" leftSection={<IconHome />} variant="light">
+      <Button
+        component={Link}
+        href="/"
+        leftSection={<IconHome />}
+        variant="light"
+      >
         Home
       </Button>
       <Indicator
@@ -25,7 +31,7 @@ export const Navbar = ({ children }: Props) => {
         label={cartItemsCount}
       >
         <ActionIcon
-          component="a"
+          component={Link}
           href="/cart"
           color="green"
           variant="light"

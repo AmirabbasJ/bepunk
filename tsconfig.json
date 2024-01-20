@@ -12,7 +12,7 @@
       "@/filter": ["./src/libs/filter/index.ts"],
       "@/search-param": ["./src/libs/search-param/index.ts"],
       "@/cache": ["./src/libs/cache/index.ts"],
-      "@/utls": ["./src/libs/utls/index.ts"],
+      "@/utils": ["./src/libs/utils/index.ts"],
     },
     "strictNullChecks": true,
   },

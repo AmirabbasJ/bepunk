@@ -7,5 +7,7 @@ interface Props {
 }
 
 export const ThemeProvider = (props: Props) => {
-  return <MantineProvider theme={theme} {...props} />;
+  return (
+    <MantineProvider theme={theme} defaultColorScheme="light" {...props} />
+  );
 };
