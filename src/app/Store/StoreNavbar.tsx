@@ -1,7 +1,7 @@
 import { Stack, Title } from '@mantine/core';
 
-import { FavoriteFilter, FoodFilter } from '../Filter';
-import { Sort } from '../Sort';
+import { FavoriteFilter, FoodFilter } from './Filter';
+import { Sort } from './Sort';
 
 export const StoreNavbar = () => {
   return (
